@@ -1,0 +1,41 @@
+<html>
+<body>
+    <head>
+        <title>Canvas</title>
+    </head>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <canvas id="theCanvas"></canvas>
+    <script>
+       var c = document.getElementById('theCanvas');
+	   var ctx = c.getContext('2d');
+	   c.width = window.innerWidth; //ensures the canvas fills the screen
+	   c.height = window.innerHeight;
+        
+        arc = { // initalizing variables
+        x: c.width/2, // ensures the pattern starts at the center
+        y: c.height/2,
+        size: 1,
+        angle: 0
+        }
+
+        for (var n = 0 ; n < 300; n++){ // creates 300 rectangles
+        ctx.save();
+        ctx.translate(arc.x, arc.y); // starts at new origin every time it loops
+        ctx.rotate(arc.angle * (Math.PI / -270)); // rotates each rectangle to create the spiral effect
+        ctx.beginPath();
+        ctx.lineWidth = arc.size/70; // thickness of rectangle stroke
+        ctx.strokeRect(-arc.size/2, -arc.size/2, arc.size, arc.size);
+        ctx.stroke();
+        arc.angle += 4; // angle of each rectangle increases by 4 as the loop iterates
+        arc.size *= 1.03; // size of rectangle increases by 1.03 times as the loop iterates
+        ctx.restore();
+        }
+
+    </script>
+</body>    
+</html>  
